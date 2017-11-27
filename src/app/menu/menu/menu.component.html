@@ -26,7 +26,8 @@
             <div class="card-title">
               <h4 style="text-transform: capitalize;">{{course.name}}
                 <span *ngIf="course.new=='Y'" class="badge badge-pill badge-danger">
-                  <i class="fa fa-angellist" aria-hidden="true"></i> new</span>
+                  <!--<i class="fa fa-angellist" aria-hidden="true"></i>-->
+                  new</span>
                 <span *ngIf="course.new=='N'" class="badge badge-pill badge-danger"></span>
               </h4>
             </div>
@@ -36,7 +37,7 @@
                   <span><b>Rating:</b> {{course.rating}}</span>
                 </div>
                 <div class="col col-6">
-                  <span><b>Price:</b> {{course.price}}</span>
+                  <span><b>Price:</b> ${{course.price}}</span>
                 </div>
               </div>
   
