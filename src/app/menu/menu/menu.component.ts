@@ -18,6 +18,8 @@ export class MenuComponent implements OnInit {
 
   restaurant: Restaurant;
   courses: Course[];
+  categories: any;
+  categoriesCourses: Course[];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +28,40 @@ export class MenuComponent implements OnInit {
     private dashboardService:DashboardService) {}
 
   ngOnInit() {
+    this.getCategories();
     this.getCourses();
+
 
   }
 
-  getCourses(){
+  getCourses(): void{
     const rid = +this.route.snapshot.paramMap.get('rid');
     this.restaurant = this.dashboardService.getRestaurant(rid);
     this.courses = this.menuService.getCourses(rid);
+    this.categoriesCourses = this.courses;
   }
+
+  getCategories(): void {
+    const rid = +this.route.snapshot.paramMap.get('rid');
+    this.categories = this.menuService.getCategories(rid);
+  }
+
+  getCategoryCourses(category): void {
+    var courses = []
+    if (category=='all'){
+      this.categoriesCourses = this.courses;
+    }else{
+      for (var i = 0; i < this.courses.length; i++) {
+        if (this.courses[i].category == category) {
+          courses.push(this.courses[i])
+        }
+      }
+      this.categoriesCourses = courses;
+    }
+
+  }
+
+
+
+
 }

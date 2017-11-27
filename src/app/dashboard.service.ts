@@ -17,8 +17,14 @@ export class DashboardService {
     return(null);
   };
 
-  getRestaurants(restaurant): Restaurant[] {
-    return(RESTAURANTS)
+  getRestaurants(rinfo): Restaurant[] {
+    var restaurants = [];
+    for (var i=0; i < RESTAURANTS.length; i++ ) {
+      if (RESTAURANTS[i].rid === +rinfo || RESTAURANTS[i].name === rinfo) {
+        restaurants.push(RESTAURANTS[i])
+      }
+    };
+    return(restaurants);
   }
 
 }

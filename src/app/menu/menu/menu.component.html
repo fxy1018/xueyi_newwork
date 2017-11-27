@@ -1,9 +1,52 @@
-<h1>{{restaurant.name}}</h1>
-<div *ngFor="let course of courses">
-  <img src="{{course.image}}" style="width: 100px; height: 100px">
-  <h4>name: {{course.name}}</h4>
-  <h5>score: {{course.score}}</h5>
-  <h5>sales: {{course.sales}}</h5>
-  <p>ingredient: {{course.ingredient}}</p>
-  <button class="btn btn-primary">Add</button>
+<div class="container-fluid">
+  <h1>{{restaurant.name}}</h1>
+  <ul class="nav nav-tabs" >
+    <li class="nav-item">
+      <a class="nav-link" (click)="getCategoryCourses('all')">All</a>
+    </li>
+    <li  *ngFor="let category of categories" class="nav-item" >
+      <a class="nav-link" (click)="getCategoryCourses(category)">{{category}}</a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="#">View</a>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-sm-4 col-" *ngFor="let course of categoriesCourses">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="{{course.image}}" width="300px" height="250px" alt="Card image cap">
+        <div class="card-block">
+          <h4 class="card-title">{{course.name}}</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <button class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="row row-content">
+  <div class="col-xs-12 col-sm-3 col-sm-push-9">
+    <p style="padding:20px;"></p>
+    <h3 align=center>Our Lipsmacking Culinary Creations</h3>
+  </div>
+  <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+    <div class="media">
+      <div class="media-left media-middle">
+        <a href="#">
+          <img class="media-object img-thumbnail"
+               src="img/uthappizza.png" alt="Uthappizza">
+        </a>
+      </div>
+      <div class="media-body">
+        <h2 class="media-heading">Uthappizza <span class="label label-danger label-xs">Hot</span> <span class="badge">$4.99</span></h2>
+        <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
+        <p><a  href="#" class="btn btn-primary btn-xs">More &raquo;</a></p>
+      </div>
+    </div>
+  </div>
 </div>
