@@ -1,0 +1,9 @@
+<h1>{{restaurant.name}}</h1>
+<div *ngFor="let course of courses">
+  <img src="{{course.image}}" style="width: 100px; height: 100px">
+  <h4>name: {{course.name}}</h4>
+  <h5>score: {{course.score}}</h5>
+  <h5>sales: {{course.sales}}</h5>
+  <p>ingredient: {{course.ingredient}}</p>
+  <button class="btn btn-primary">Add</button>
+</div>

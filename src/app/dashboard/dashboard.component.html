@@ -1,0 +1,32 @@
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">
+    E-Menu
+  </a>
+  <div>
+    <button class="btn btn-success">Login</button>
+    <button class="btn btn-warning">Register</button>
+  </div>
+</nav>
+
+<div>
+  <div class="jumbotron">
+    <div clsss="row">
+      <label>Search Restaurant</label>
+      <div class="input-group">
+        <input  [(ngModel)]="restaurant" type="text" class="form-control" placeholder="Search for restaurant with ID or name" >
+        <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="getRestaurants(restaurant)">Go!</button>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="restaurants">
+    <div *ngFor="let restaurant of restaurants">
+      <a class="btn btn-success" routerLink="/menu/{{restaurant.rid}}">{{restaurant.name}}</a>
+      {{restaurant.name}}
+    </div>
+  </div>
+  
+</div>
