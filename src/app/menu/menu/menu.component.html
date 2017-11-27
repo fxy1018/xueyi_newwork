@@ -1,24 +1,49 @@
 <div class="container-fluid">
-  <h1>{{restaurant.name}}</h1>
-  <ul class="nav nav-tabs" >
-    <li class="nav-item">
-      <a class="nav-link" (click)="getCategoryCourses('all')">All</a>
-    </li>
-    <li  *ngFor="let category of categories" class="nav-item" >
-      <a class="nav-link" (click)="getCategoryCourses(category)">{{category}}</a>
-    </li>
-    <li class="nav-item ">
-      <a class="nav-link" href="#">View</a>
-    </li>
-  </ul>
   <div class="row">
-    <div class="col-sm-4 col-" *ngFor="let course of categoriesCourses">
+    <h1>{{restaurant.name}}</h1>
+  </div>
+  
+  <div class="row">
+    <ul class="nav nav-tabs" >
+      <li class="nav-item">
+        <a class="nav-link" (click)="getCategoryCourses('all')">All</a>
+      </li>
+      <li  *ngFor="let category of categories" class="nav-item" >
+        <a class="nav-link" (click)="getCategoryCourses(category)">{{category}}</a>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-warning pull-right">View Order</button>
+      </li>
+    </ul>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-xs-12" *ngFor="let course of categoriesCourses">
       <div class="card" style="width: 20rem;">
         <img class="card-img-top" src="{{course.image}}" width="300px" height="250px" alt="Card image cap">
-        <div class="card-block">
-          <h4 class="card-title">{{course.name}}</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <button class="btn btn-primary">Add</button>
+        <div class="card-body">
+          <div class="card-block">
+            <div class="card-title">
+              <h4 style="text-transform: capitalize;">{{course.name}}
+                <span *ngIf="course.new=='Y'" class="badge badge-pill badge-danger">
+                  <i class="fa fa-angellist" aria-hidden="true"></i> new</span>
+                <span *ngIf="course.new=='N'" class="badge badge-pill badge-danger"></span>
+              </h4>
+            </div>
+            <div class="card-text">
+              <div class="row">
+                <div class="col col-6">
+                  <span><b>Rating:</b> {{course.rating}}</span>
+                </div>
+                <div class="col col-6">
+                  <span><b>Price:</b> {{course.price}}</span>
+                </div>
+              </div>
+  
+              <span><b>Ingredient:</b> {{course.ingredient}}</span>
+            </div>
+            <button class="col btn btn-primary" (click)="addDish()">Add</button>
+          </div>
         </div>
       </div>
     </div>
@@ -26,27 +51,3 @@
 </div>
 
 
-
-
-
-<div class="row row-content">
-  <div class="col-xs-12 col-sm-3 col-sm-push-9">
-    <p style="padding:20px;"></p>
-    <h3 align=center>Our Lipsmacking Culinary Creations</h3>
-  </div>
-  <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-    <div class="media">
-      <div class="media-left media-middle">
-        <a href="#">
-          <img class="media-object img-thumbnail"
-               src="img/uthappizza.png" alt="Uthappizza">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Uthappizza <span class="label label-danger label-xs">Hot</span> <span class="badge">$4.99</span></h2>
-        <p>A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.</p>
-        <p><a  href="#" class="btn btn-primary btn-xs">More &raquo;</a></p>
-      </div>
-    </div>
-  </div>
-</div>
