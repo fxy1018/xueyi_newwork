@@ -1,0 +1,92 @@
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" aria-describedby="fistNameHelp" placeholder="Enter first name">
+      
+    </div>
+  
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp" placeholder="Enter Last Name">
+    </div>
+    
+    <fieldset class="form-group">
+      <label for="gender">Gender</label>
+      <div id="gender">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="female" value="option1" checked>
+            Female
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="male" value="option2">
+            Male
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input class="form-control" type="date" id="birthDate">
+    </div>
+    
+    <hr>
+    <div class="form-group">
+      <form role="form">
+        <div class="form-group">
+          <label>Payment Details</label>
+          <img class="img-responsive cc-img" src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+        </div>
+        
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <div class="input-group">
+            <input id="cardNumber" type="tel" class="form-control" placeholder="Valid Card Number" />
+            <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label><span class="visible-xs-inline">EXP</span> DATE</label>
+          <input type="tel" class="form-control" placeholder="MM / YY" />
+        </div>
+        
+        <div class="form-group">
+          <label>CV Code</label>
+          <input type="tel" class="form-control" placeholder="CVC" />
+        </div>
+        
+        <div class="form-group">
+          <label>Card Owner</label>
+          <input type="text" class="form-control" placeholder="Card Owner Names" />
+        </div>
+        
+      </form>
+      
+    </div>
+         
+    
+    <button type="submit" class="btn btn-primary" >Update</button>
+  </form>
+  
+  
+  
+  <style>
+    .cc-img {
+      width: 250px;
+      height: 50px;
+    }
+  </style>
+
+
+</div>

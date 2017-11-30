@@ -7,6 +7,10 @@ import { AppComponent } from './app.component';
 
 //Import the Http Module and Data Service
 import { HttpModule } from '@angular/http';
+//Import credit card module
+// import { NgXCreditCardsModule } from 'ngx-credit-cards';
+// import { CreditCardDirectivesModule } from 'ng2-cc-library'
+
 import { DataService } from './data.service';
 import { DashboardService } from './dashboard.service';
 
@@ -15,6 +19,8 @@ import { CustomerLoginComponent } from './customer/customer-login/customer-login
 import { MenuComponent } from './menu/menu/menu.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { MenuService } from './menu.service';
+import { CustomerSignupComponent } from './customer/customer-signup/customer-signup.component';
+import { ProfileComponent } from './customer/profile/profile.component';
 
 
 
@@ -23,13 +29,18 @@ import { MenuService } from './menu.service';
     AppComponent,
     DashboardComponent,
     CustomerLoginComponent,
-    MenuComponent
+    MenuComponent,
+    CustomerSignupComponent,
+    ProfileComponent,
+    
   ],
   imports: [
     BrowserModule,
       HttpModule,
       FormsModule,
       AppRoutingModule,
+    // NgXCreditCardsModule,
+    // CreditCardDirectivesModule,
 
   ],
   providers: [DataService, DashboardService, MenuService, ],
