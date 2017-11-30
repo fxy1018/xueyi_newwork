@@ -1,15 +1,14 @@
-<button class="btn btn-success" data-toggle="modal" data-target="#customerLogin">Login</button>
-<div class="modal fade" id="customerLogin" tabindex="-1" role="dialog" aria-labelledby="customerLoginLabel" aria-hidden="true">
+<button class="btn btn-primary" data-toggle="modal" data-target="#customerSignUp">Sign up</button>
+<div class="modal fade" id="customerSignUp" tabindex="-1" role="dialog" aria-labelledby="customerSignUpLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="customerLoginTitle">Login</h5>
+        <h5 class="modal-title" id="customerSignUpTitle">Sign Up</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-  
         <form>
           <div class="form-group">
             <label for="customerEmail">Email address</label>
@@ -20,10 +19,14 @@
             <label for="customerPassword">Password</label>
             <input type="password" class="form-control" id="customerPassword" placeholder="Password">
           </div>
+          <div class="form-group">
+            <label for="customerPassword2">Repeat Password</label>
+            <input type="password" class="form-control" id="customerPassword2" placeholder="Password">
+          </div>
+        
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success">Log in</button>
         <button type="button" class="btn btn-primary">Sign up</button>
       </div>
     </div>

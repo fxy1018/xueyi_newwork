@@ -15,7 +15,9 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+
   }
+
 
   getRestaurants(restaurant): void {
     this.restaurants = this.dashboardService.getRestaurants(restaurant);
