@@ -1,6 +1,6 @@
 import { Customer } from "./customer";
 
-export const CUSTOMERS: Customer[]= [
+export var CUSTOMERS: Customer[]= [
   {  cid: 1,
     password:"123",
     email: "xueyifan@mock.com",
@@ -28,6 +28,14 @@ export const CUSTOMERS: Customer[]= [
   {  cid: 4,
     password:"456",
     email: "shirley@mock.com",
+    firstname: "Shirley",
+    lastname: "Fan",
+    gender: "F",
+    birthdate: "12-31-1989",
+  },
+  {  cid: 5,
+    password:"abc",
+    email: "abc",
     firstname: "Shirley",
     lastname: "Fan",
     gender: "F",

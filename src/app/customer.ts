@@ -1,9 +1,9 @@
 export class Customer {
-    cid: Number;
-    email: String;
-    password: String;
-    firstname: String;
-    lastname: String;
-    gender: String;
-    birthdate: String;
+    cid: number;
+    email: string;
+    password: string;
+    firstname: string;
+    lastname: string;
+    gender: string;
+    birthdate: string;
 }

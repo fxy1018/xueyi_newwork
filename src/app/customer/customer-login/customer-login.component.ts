@@ -9,7 +9,7 @@ import { Customer } from "../../customer";
 })
 export class CustomerLoginComponent implements OnInit {
   visitor = {
-        email : null,
+        username: null,
         password: null,
     };
   customer: Customer;
@@ -22,11 +22,11 @@ export class CustomerLoginComponent implements OnInit {
 
   }
 
-  getCustomer(username, password): void{
-    this.customer = this.customerService.getCustomer(username, password)
+  login(): void{
+    this.customer = this.customerService.getCustomer(this.visitor.username, this.visitor.password);
     console.log(this.customer)
   }
 
-  
+
 
 }
