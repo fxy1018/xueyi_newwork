@@ -1,14 +1,14 @@
 export class Course {
-  cid: Number;
-  rid: Number;
-  category: String;
-  name: String;
-  price: Number;
-  image: String;
-  ingredient: String;
-  option: String;
-  vegetarian: String;
-  rating: Number;
-  waiting_time: Number;
-  new: String;
+  cid: number;
+  rid: number;
+  category: string;
+  name: string;
+  price: number;
+  image: string;
+  ingredient: string;
+  option: string;
+  vegetarian: string;
+  rating: number;
+  waiting_time: number;
+  new: string;
 }

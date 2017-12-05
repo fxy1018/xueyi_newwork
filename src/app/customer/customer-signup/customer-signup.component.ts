@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CustomerService } from "../../customer.service";
 import { Customer } from "../../customer";
 
@@ -8,17 +9,17 @@ import { Customer } from "../../customer";
   styleUrls: ['./customer-signup.component.css']
 })
 export class CustomerSignupComponent implements OnInit {
-  newuser = {
-    email: null,
+
+  tmpUser = {
+    username: null,
     password1:null,
-    password2:null
-  };
+    password2:null,
+  }
 
-  customer: Customer;
-
+  newCustomer: Customer;
+  signupMeg: string;
   constructor(
-      private customerService: CustomerService,
-
+    private customerService:CustomerService,
   ) { }
 
   ngOnInit() {
@@ -28,5 +29,16 @@ export class CustomerSignupComponent implements OnInit {
     console.log(this.customer)
   }
 
+
+  signup(): void{
+    var res = this.customerService.createCustomer(this.tmpUser.username, this.tmpUser.password1, this.tmpUser.password2);
+    if (res){
+      this.newCustomer = res
+    }else if (res=="password not same"){
+      this.signupMeg = "password not same";
+    }else if (res=="email exist"){
+      this.signupMeg = "email exist";
+    }
+  }
 
 }

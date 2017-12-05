@@ -1,9 +1,9 @@
 export class Restaurant {
-    rid:Number;
-    name: String;
-    street: String;
-    unit: String;
-    city: String;
-    province: String;
-    postal_code: String;
+    rid:number;
+    name: string;
+    street: string;
+    unit: string;
+    city: string;
+    province: string;
+    postal_code: string;
 }
