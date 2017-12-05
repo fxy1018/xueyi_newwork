@@ -4,6 +4,8 @@ import { Customer } from "./customer";
 
 @Injectable()
 export class CustomerService {
+  newCustomer: Customer;
+
   constructor() { }
   getCustomer(email, password): any{
     for (var i=0; i < CUSTOMERS.length; i++){
@@ -22,20 +24,23 @@ export class CustomerService {
 
   createCustomer(email, password1, password2): any{
     if (password1 != password2){
-      return(console.log("password not same"))
+      console.log("password not same")
+      return(null)
     }
     for (var i=0; i < CUSTOMERS.length; i++){
       var c = CUSTOMERS[i];
       if (c.email===email){
-        return(console.log("email exist"))
+        console.log("email exist")
+        return(null)
       }
     }
 
-    var newCustomer: Customer;
-    newCustomer.cid = +CUSTOMERS[CUSTOMERS.length-1].cid + 1
-    newCustomer.email = email;
-    newCustomer.password = password1;
-    CUSTOMERS.push(newCustomer)
-    return(CUSTOMERS)
+    console.log(+CUSTOMERS[CUSTOMERS.length-1].cid + 1);
+    this.newCustomer.cid = +CUSTOMERS[CUSTOMERS.length-1].cid + 1
+    this.newCustomer.email = email;
+    this.newCustomer.password = password1;
+    CUSTOMERS.push(this.newCustomer)
+    console.log(CUSTOMERS)
+    return(this.newCustomer)
   }
 }
