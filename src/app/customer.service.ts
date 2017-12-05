@@ -11,7 +11,7 @@ export class CustomerService {
     for (var i=0; i < CUSTOMERS.length; i++){
       var c = CUSTOMERS[i];
       if (c.email===email && c.password===password){
-        return(c)
+        return(c.cid)
       }
     }
     return(null)
@@ -23,30 +23,11 @@ export class CustomerService {
 
   createCustomer(email, password1, password2): any{
     if (password1 != password2){
-<<<<<<< HEAD
-      console.log("password not same")
-      return(null)
-=======
       return("password not same")
->>>>>>> 2bba583bba14e8da1131c4c6cb933cbc5e30f8e8
     }
     for (var i=0; i < CUSTOMERS.length; i++){
       var c = CUSTOMERS[i];
       if (c.email===email){
-<<<<<<< HEAD
-        console.log("email exist")
-        return(null)
-      }
-    }
-
-    console.log(+CUSTOMERS[CUSTOMERS.length-1].cid + 1);
-    this.newCustomer.cid = +CUSTOMERS[CUSTOMERS.length-1].cid + 1
-    this.newCustomer.email = email;
-    this.newCustomer.password = password1;
-    CUSTOMERS.push(this.newCustomer)
-    console.log(CUSTOMERS)
-    return(this.newCustomer)
-=======
         return("email exist")
       }
     }
@@ -72,6 +53,5 @@ export class CustomerService {
     console.log(newCustomer)
     CUSTOMERS.push(newCustomer)
     return(newCustomer)
->>>>>>> 2bba583bba14e8da1131c4c6cb933cbc5e30f8e8
   }
 }

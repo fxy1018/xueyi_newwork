@@ -24,12 +24,6 @@ export class CustomerSignupComponent implements OnInit {
 
   ngOnInit() {
   }
-  createCustomer():void{
-    this.customer = this.customerService.createCustomer(this.newuser.email, this.newuser.password1, this.newuser.password2);
-    console.log(this.customer)
-  }
-
-
   signup(): void{
     var res = this.customerService.createCustomer(this.tmpUser.username, this.tmpUser.password1, this.tmpUser.password2);
     if (res){
