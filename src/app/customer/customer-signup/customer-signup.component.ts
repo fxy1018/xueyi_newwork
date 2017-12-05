@@ -26,12 +26,12 @@ export class CustomerSignupComponent implements OnInit {
   }
   signup(): void{
     var res = this.customerService.createCustomer(this.tmpUser.username, this.tmpUser.password1, this.tmpUser.password2);
-    if (res){
-      this.newCustomer = res
-    }else if (res=="password not same"){
+    if (res=="password not same"){
       this.signupMeg = "password not same";
     }else if (res=="email exist"){
       this.signupMeg = "email exist";
+    }else if (res){
+      this.newCustomer = res
     }
   }
 
