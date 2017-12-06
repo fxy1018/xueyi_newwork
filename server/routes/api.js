@@ -3,7 +3,7 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
 // Connect
 var connection = function(closure) {
