@@ -6,13 +6,19 @@ const ObjectID = require('mongodb').ObjectID;
 var mongoose = require('mongoose');
 
 // Connect
-const connection = (closure) => {
+var connection = function(closure) {
     return MongoClient.connect('mongodb://localhost:27017/e-menu', (err, db) => {
             if (err) return console.log(err);
-
-    closure(db);
-});
+            closure(db);
+          });
 };
+
+//wrap express routes to handle rejected promises
+const asyncMiddleware = fn =>
+  (req, res, next) => {
+    Promise.resolve(fn(req, res, next))
+      .catch(next);
+  }
 
 //middleware to use for all requests
 router.use(function(req, res, next) {
@@ -26,69 +32,43 @@ router.get('', function(req, res) {
   res.json({message:"hello, welcome to api"});
 });
 
-// Error handling
-const sendError = (err, res) => {
-    response.status = 501;
-    response.message = typeof err == 'object' ? err.message : err;
-    res.status(501).json(response);
-};
-
-// Response handling
-let response = {
-    status: 200,
-    data: [],
-    message: null
-};
-
 // Get users
-router.get('/users', (req, res) => {
-    let username = req.query.username;
-    let password = req.query.password;
+router.get('/users', asyncMiddleware(async(req, res, next) => {
+  let username = req.query.username;
+  let password = req.query.password;
 
-    connection((db) => {
-    db.collection('users')
-        .find({email:username, password: password})
-        .toArray()
-        .then((users) => {
-        response.data = users;
-        res.json(response);
-        })
-        .catch((err) => {
-            sendError(err, res);
-            });
-    });
-});
+  connection(asyncMiddleware(async (db) => {
+    var user = await db.collection('users')
+                    .find({email:username, password: password})
+                    .toArray()
+    if (user.length==0){
+      res.sendStatus(404)
+    }else{
+      res.json(user)
+    }
+    db.close();
+  }));
+}));
 
 router.post('/users', (req,res) => {
     let username = req.body.username;
     let password = req.body.password;
-    connection((db)=>{
-      db.collection('users')
-      .find({email:username})
-      .then((user) => {
-        var tmp = user;
-      })
-    })
 
-    if (tmp == null){
-      connection((db)=>{
-        db.collection('users')
-        .insert({email:username, password:password})
-        .then((user) => {
-          res.sendStatus(201)
-        })
-        .catch((err)=>{
-          sendError(err, res);
-        });
-      });
-    } else {
-      res.sendStatus(400)
-    }
+    connection(asyncMiddleware(async (db) => {
+      var user = await db.collection('users')
+                      .find({email:username})
+                      .toArray()
+      if (user.length!=0){
+        res.sendStatus(400)
+      }else{
+        var newUser = await db.collection('users')
+                          .insertOne({email: username, password: password})
+        res.json(newUser)
+      }
+      db.close();
+    }));
 
-  })
-
-
-
+  });
 //Get restaurants
 
 
