@@ -67,7 +67,6 @@ router.post('/users', (req,res) => {
       }
       db.close();
     }));
-
   });
 //Get restaurants
 
