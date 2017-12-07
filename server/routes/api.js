@@ -12,17 +12,10 @@ var connection = function(closure) {
           });
 };
 
-//wrap express routes to handle rejected promises
-const asyncMiddleware = fn =>
-  (req, res, next) => {
-    Promise.resolve(fn(req, res, next))
-      .catch(next);
-  }
-
 //middleware to use for all requests
 router.use(function(req, res, next) {
   //do logging
-  console.log('Something is happening.');
+  console.log('Begin to Use API');
   next();
 });
 
@@ -30,47 +23,6 @@ router.use(function(req, res, next) {
 router.get('', function(req, res) {
   res.json({message:"hello, welcome to api"});
 });
-
-// Get users
-router.get('/users', asyncMiddleware(async(req, res, next) => {
-  let username = req.query.username;
-  let password = req.query.password;
-
-  connection(asyncMiddleware(async (db) => {
-    var user = await db.collection('users')
-                    .find({email:username, password: password})
-                    .toArray()
-    if (user.length==0){
-      res.sendStatus(404)
-    }else{
-      res.json(user)
-    }
-    db.close();
-  }));
-}));
-
-router.post('/users', (req,res) => {
-    let username = req.body.username;
-    let password = req.body.password;
-
-    connection(asyncMiddleware(async (db) => {
-      var user = await db.collection('users')
-                      .find({email:username})
-                      .toArray()
-      if (user.length!=0){
-        res.sendStatus(400)
-      }else{
-        var newUser = await db.collection('users')
-                          .insertOne({email: username, password: password})
-        res.json(newUser)
-      }
-      db.close();
-    }));
-  });
-//Get restaurants
-
-
-
 
 
 module.exports = router;
