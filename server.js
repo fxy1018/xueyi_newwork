@@ -6,6 +6,9 @@ const app = express();
 
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
+const api_user = require('./server/routes/api_user');
+const api_restaurant = require('./server/routes/api_restaurant');
+const api_course = require('./server/routes/api_course');
 
 // Parsers
 app.use(bodyParser.json());
@@ -16,6 +19,9 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // API location
 app.use('/api', api);
+app.use('/api', api_user);
+app.use('/api', api_restaurant);
+app.use('/api', api_course);
 
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
