@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CUSTOMERS } from './mock-customers';
 import { Customer } from "./customer";
+import { Http, Headers, RequestOptions } from "@angular/http";
+import 'rxjs/add/operator/map';
+
+
 
 @Injectable()
 export class CustomerService {
   newCustomer: Customer;
+  customer: any;
+  constructor(private http: Http) { }
 
-  constructor() { }
-  getCustomer(email, password): any{
-    for (var i=0; i < CUSTOMERS.length; i++){
-      var c = CUSTOMERS[i];
-      if (c.email===email && c.password===password){
-        return(c.cid)
-      }
-    }
-    return(null)
+  getCustomer(email, password): void{
+    let query = "/api/users?username=".concat(email, "&" , "password=" , password);
+    this.http.get(query)
+        .map(response => this.customer = response.json().data[0]);
   }
 
   getCustomerById(cid){
