@@ -3,8 +3,6 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-var mongoose = require('mongoose');
-
 // Connect
 const connection = (closure) => {
     return MongoClient.connect('mongodb://localhost:27017/e-menu', (err, db) => {
