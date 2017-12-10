@@ -87,7 +87,7 @@ router.post('/restaurant/:rid/courses/', asyncMiddleware(async(req, res, next) =
         await db.collection('courses')
                         .findOneAndUpdate({cid:courseId,
                                           rid: restaurantId},
-                                          $set: {
+                                            {$set: {
                                             category:req.body.category,
                                             name: req.body.name,
                                             price: req.body.price,
@@ -100,12 +100,11 @@ router.post('/restaurant/:rid/courses/', asyncMiddleware(async(req, res, next) =
                                             waiting_time: req.body.waiting_time,
                                             new: req.body.new,
                                             //to be continue
-                                          },
+                                          }},
                                           {sort: {_id: -1},
                                           upsert: true},
                                           (result)=>{res.json(result)})
-      };
-      db.close();
+        db.close();
       }));
     }))
 
@@ -118,7 +117,7 @@ router.delete('/restaurant/:rid/courses/:cid', asyncMiddleware(async(req, res, n
       await db.collection('courses')
                       .findOneAndDelete({cid:courseId,
                                         rid: restaurantId},
-                                        $set: {
+                                        {$set: {
                                           category:req.body.category,
                                           name: req.body.name,
                                           price: req.body.price,
@@ -131,10 +130,10 @@ router.delete('/restaurant/:rid/courses/:cid', asyncMiddleware(async(req, res, n
                                           waiting_time: req.body.waiting_time,
                                           new: req.body.new,
                                           //to be continue
-                                        },
-                                        (result)=>{res.sendStatus(200)})
-    };
-    db.close();
+                                        }},
+                                        (result)=>{res.sendStatus(200)});
+
+      db.close();
     }));
   }))
 

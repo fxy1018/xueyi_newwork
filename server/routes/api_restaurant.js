@@ -71,7 +71,7 @@ const asyncMiddleware = fn =>
       connection(asyncMiddleware(async (db) => {
         await db.collection('restaurants')
                         .findOneAndUpdate({rid:restaurantId},
-                                          $set: {
+                                            {$set: {
                                             name:req.body.name,
                                             street: req.body.street,
                                             unit: req.body.unit,
@@ -79,11 +79,10 @@ const asyncMiddleware = fn =>
                                             province: req.body.province,
                                             postal_code: req.body.postal_code
                                             //to be continue
-                                          },
+                                          }},
                                           {},
-                                          (result)=>{res.json(result)})
-      };
-      db.close();
+                                          (result)=>{res.json(result)});
+        db.close();
       }));
     }))
 

@@ -85,15 +85,14 @@ router.put('/users/:cid', asyncMiddleware(async(req, res, next) => {
     connection(asyncMiddleware(async (db) => {
       await db.collection('users')
                       .findOneAndUpdate({cid:customerId},
-                                        $set: {
+                                        {$set: {
                                           passwod:req.body.password,
                                           firstname: req.body.firstname,
                                           secondname: req.body.secondname,
                                           //to be continue
-                                        },
+                                        }},
                                         {},
                                         (result)=>{res.json(result)})
-    };
     db.close();
     }));
   }))

@@ -12,14 +12,14 @@ export class CustomerService {
   customer: any;
   constructor(private http: Http) { }
 
-  getCustomer(email, password): void{
+  getCustomer(email, password): any{
     let query = "/api/users?username=".concat(email, "&" , "password=" , password);
     this.http.get(query)
         .map(response => this.customer = response.json().data[0]);
   }
 
-  getCustomerById(cid){
-
+  getCustomerById(cid): any{
+    return cid;
   }
 
   createCustomer(email, password1, password2): any{
@@ -44,7 +44,7 @@ export class CustomerService {
     };
 
     newCustomer.cid = +CUSTOMERS[CUSTOMERS.length-1].cid + 1
-    console.log(newCustomer.cid)
+    console.log(newCustomer.cid);
     newCustomer.email = email;
     newCustomer.password = password1;
     newCustomer.firstname = null;
