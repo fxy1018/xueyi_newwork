@@ -40,7 +40,7 @@ router.get('/users', asyncMiddleware(async(req, res, next) => {
 
 //Get use info by user ID
 router.get('/users/:cid', asyncMiddleware(async(req, res, next) => {
-  let customerId = req.params.cid;
+  let customerId = +(req.params.cid);
 
   connection(asyncMiddleware(async (db) => {
     var user = await db.collection('users')
@@ -49,7 +49,7 @@ router.get('/users/:cid', asyncMiddleware(async(req, res, next) => {
     if (user.length==0){
       res.sendStatus(404)
     }else{
-      res.json(user[0].cid)
+      res.json(user[0]._id)
     }
     db.close();
   }));

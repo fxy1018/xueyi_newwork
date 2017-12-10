@@ -21,13 +21,14 @@ const asyncMiddleware = fn =>
   }
 
 //Get courses by restaurant Id
-router.get('/restaurant/:rid/courses', asyncMiddleware(async (req, res, next)=>{
-  let restaurantId = +req.params.rid
+router.get('/restaurants/:rid/courses', asyncMiddleware(async (req, res, next)=>{
+  let restaurantId = +req.params.rid;
+  console.log(restaurantId);
   connection(asyncMiddleware(async (db) => {
     var courses = await db.collection('courses')
                     .find({rid:restaurantId})
                     .toArray()
-    if (user.length==0){
+    if (courses.length==0){
       res.sendStatus(404)
     }else{
       res.json(courses)
@@ -37,7 +38,7 @@ router.get('/restaurant/:rid/courses', asyncMiddleware(async (req, res, next)=>{
 }));
 
 //Get course by course Id
-router.get('/restaurant/:rid/courses/:cid', asyncMiddleware(async (req, res, next)=>{
+router.get('/restaurants/:rid/courses/:cid', asyncMiddleware(async (req, res, next)=>{
   let restaurantId = +req.params.rid
   let courseId = +req.params.cid
   connection(asyncMiddleware(async (db) => {
@@ -45,7 +46,7 @@ router.get('/restaurant/:rid/courses/:cid', asyncMiddleware(async (req, res, nex
                     .find({rid:restaurantId,
                            cid:courseId })
                     .toArray()
-    if (user.length==0){
+    if (course.length==0){
       res.sendStatus(404)
     }else{
       res.json(course[0])
@@ -55,14 +56,14 @@ router.get('/restaurant/:rid/courses/:cid', asyncMiddleware(async (req, res, nex
 }));
 
 //Create a new course
-router.post('/restaurant/:rid/courses/', asyncMiddleware(async(req, res, next) => {
+router.post('/restaurants/:rid/courses/', asyncMiddleware(async(req, res, next) => {
     let restaurantId = +req.params.rid
 
     connection(asyncMiddleware(async (db) => {
-      var user = await db.collection('courses')
+      var course = await db.collection('courses')
                       .find({name:req.body.name})
                       .toArray()
-      if (user.length!=0){
+      if (course.length!=0){
         res.sendStatus(400)
       }else{
         course = req.body;
@@ -79,7 +80,7 @@ router.post('/restaurant/:rid/courses/', asyncMiddleware(async(req, res, next) =
   }));
 
   //Update course by id
-  router.put('/restaurant/:rid/courses/:cid', asyncMiddleware(async(req, res, next) => {
+  router.put('/restaurants/:rid/courses/:cid', asyncMiddleware(async(req, res, next) => {
       let restaurantId = +req.params.rid
       let courseId = +req.params.cid
 
