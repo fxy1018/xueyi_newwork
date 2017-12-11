@@ -12,8 +12,8 @@ export class AppComponent {
   users: Array<any>;
 
   constructor(private dataService: DataService){
-    this.dataService.getUsers()
-        .subscribe(res => this.users = res);
+    // this.dataService.getUsers()
+    //     .subscribe(res => this.users = res);
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../customer.service';
 import { Customer } from "../../customer";
+import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-customer-login',
@@ -12,7 +14,7 @@ export class CustomerLoginComponent implements OnInit {
         username: null,
         password: null,
     };
-  customer: Customer;
+  customer: Customer[];
 
   constructor(
     private customerService: CustomerService,
@@ -24,8 +26,11 @@ export class CustomerLoginComponent implements OnInit {
 
 
   login(): void{
-    this.customer = this.customerService.getCustomer(this.visitor.username, this.visitor.password);
-    console.log(this.customer)
+    console.log(this.visitor.username, this.visitor.password);
+    this.customerService.getCustomer(this.visitor.username, this.visitor.password)
+        .subscribe(data => {this.customer = data;
+                            console.log(this.customer)},
+                  error=> console.log("Error :: " + error.statusText));
   }
 
 

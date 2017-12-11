@@ -23,7 +23,6 @@ const asyncMiddleware = fn =>
 //Get courses by restaurant Id
 router.get('/restaurants/:rid/courses', asyncMiddleware(async (req, res, next)=>{
   let restaurantId = +req.params.rid;
-  console.log(restaurantId);
   connection(asyncMiddleware(async (db) => {
     var courses = await db.collection('courses')
                     .find({rid:restaurantId})

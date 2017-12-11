@@ -25,17 +25,32 @@ router.get('/users', asyncMiddleware(async(req, res, next) => {
   let username = req.query.username;
   let password = req.query.password;
 
-  connection(asyncMiddleware(async (db) => {
-    var user = await db.collection('users')
-                    .find({email:username, password: password})
-                    .toArray()
-    if (user.length==0){
-      res.sendStatus(404)
-    }else{
-      res.json(user[0].cid)
-    }
-    db.close();
+  console.log(username, password);
+  if (!password){
+      connection(asyncMiddleware(async (db) => {
+              var user = await db.collection('users')
+              .find({email:username})
+              .toArray()
+      if (user.length==0){
+          res.sendStatus(404)
+      }else{
+          res.json(user[0].email)
+      }
+      db.close();
   }));
+  }else {
+      connection(asyncMiddleware(async(db) => {
+              var user = await db.collection('users')
+              .find({email: username, password: password})
+              .toArray()
+      if (user.length == 0) {
+          res.sendStatus(404)
+      } else {
+          res.json(user)
+      }
+      db.close();
+  }));
+  }
 }));
 
 //Get use info by user ID
@@ -49,16 +64,19 @@ router.get('/users/:cid', asyncMiddleware(async(req, res, next) => {
     if (user.length==0){
       res.sendStatus(404)
     }else{
-      res.json(user[0]._id)
+      res.json(user)
     }
     db.close();
   }));
 }));
 
+
 //Create a new user
 router.post('/users', asyncMiddleware(async(req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
+
+    console.log(username, password)
 
     connection(asyncMiddleware(async (db) => {
       var user = await db.collection('users')
@@ -80,19 +98,20 @@ router.post('/users', asyncMiddleware(async(req, res, next) => {
 
 //Update user by id
 router.put('/users/:cid', asyncMiddleware(async(req, res, next) => {
-    let customerId = req.params.cid;
+    let customerId = +req.params.cid;
 
     connection(asyncMiddleware(async (db) => {
       await db.collection('users')
                       .findOneAndUpdate({cid:customerId},
                                         {$set: {
-                                          passwod:req.body.password,
+                                          password:req.body.password,
                                           firstname: req.body.firstname,
-                                          secondname: req.body.secondname,
+                                          lastname: req.body.lastname,
                                           //to be continue
                                         }},
                                         {},
                                         (result)=>{res.json(result)})
+        res.sendStatus(200)
     db.close();
     }));
   }))

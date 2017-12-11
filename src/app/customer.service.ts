@@ -1,58 +1,72 @@
 import { Injectable } from '@angular/core';
-import { CUSTOMERS } from './mock-customers';
 import { Customer } from "./customer";
-import { Http, Headers, RequestOptions } from "@angular/http";
-import 'rxjs/add/operator/map';
+import { Http, Headers, RequestOptions, Response } from "@angular/http";
+import { Observable } from 'rxjs/Observable';
+import { of } from "rxjs/observable/of";
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { catchError, map, tap} from 'rxjs/operators';
 
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable()
 export class CustomerService {
   newCustomer: Customer;
   customer: any;
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private httpClient: HttpClient) { }
 
-  getCustomer(email, password): any{
-    let query = "/api/users?username=".concat(email, "&" , "password=" , password);
-    this.http.get(query)
-        .map(response => this.customer = response.json().data[0]);
-  }
-
-  getCustomerById(cid): any{
-    return cid;
-  }
-
-  createCustomer(email, password1, password2): any{
-    if (password1 != password2){
-      return("password not same")
+  private handleError<T>(operation='operation',
+                         result?: T){
+    return (error: any): Observable<T> =>{
+      console.error(error);
+      return of(result as T);
     }
-    for (var i=0; i < CUSTOMERS.length; i++){
-      var c = CUSTOMERS[i];
-      if (c.email===email){
-        return("email exist")
-      }
-    }
-
-    var newCustomer = {
-      cid: null,
-      email: null,
-      password: null,
-      firstname: null,
-      lastname: null,
-      gender: null,
-      birthdate: null,
-    };
-
-    newCustomer.cid = +CUSTOMERS[CUSTOMERS.length-1].cid + 1
-    console.log(newCustomer.cid);
-    newCustomer.email = email;
-    newCustomer.password = password1;
-    newCustomer.firstname = null;
-    newCustomer.lastname= null;
-    newCustomer.gender= null;
-    newCustomer.birthdate= null;
-    console.log(newCustomer)
-    CUSTOMERS.push(newCustomer)
-    return(newCustomer)
   }
+
+  private usersApiUrl = 'http://localhost:3000/api/users';
+
+  getCustomer(email, password): Observable<Customer[]>{
+    let url = `${this.usersApiUrl}?username=${email}&password=${password}`;
+    return this.httpClient.get<Customer[]>(url)
+        .pipe(
+          catchError(this.handleError('getCustomer', []))
+        );
+  }
+
+  getCustomerById(cid:number): Observable<Customer[]>{
+    const url = `${this.usersApiUrl}/${cid}`;
+    return this.httpClient.get<Customer[]>(url)
+        .pipe(
+            catchError(this.handleError('getCustomerById', []))
+        );
+  }
+
+  getCustomerByUsername(username:string): Observable<any>{
+    const url = `${this.usersApiUrl}?username=${username}`;
+    return this.httpClient.get(url)
+        .pipe(
+            catchError(this.handleError('getCustomerByUsername', []))
+        );
+  }
+
+  createCustomer(email, password): Observable<any>{
+    return this.httpClient.post(this.usersApiUrl, {username: email, password:password},
+    httpOptions).pipe(
+            catchError(this.handleError('createCustomer'))
+        )
+  }
+
+  updateCustomer(customer: Customer): Observable<any>{
+
+    return this.httpClient.put(this.usersApiUrl, customer,
+        httpOptions).pipe(
+            catchError(this.handleError<any>('updateCustomer'))
+    );
+  }
+
+
 }

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { CustomerService } from '../../customer.service';
+import { Customer } from '../../customer';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+      private customerService: CustomerService,
+      private route: ActivatedRoute,
+      private location: Location,
+  ) { }
 
   ngOnInit() {
   }

@@ -23,16 +23,35 @@ export class CustomerSignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.customerService.getCustomerByUsername("abc")
+        .subscribe(data=> {
+          console.log(data)
+        });
   }
   signup(): void{
-    var res = this.customerService.createCustomer(this.tmpUser.username, this.tmpUser.password1, this.tmpUser.password2);
-    if (res=="password not same"){
-      this.signupMeg = "password not same";
-    }else if (res=="email exist"){
-      this.signupMeg = "email exist";
-    }else if (res){
-      this.newCustomer = res
+    if (this.tmpUser.password1 != this.tmpUser.password2){
+      this.signupMeg = "password not same"
+    } else{
+      this.signupMeg = "";
+      this.customerService.getCustomerByUsername(this.tmpUser.username)
+          .subscribe(
+              data => {
+                if (data) {
+                  this.signupMeg = "email exist";
+                } else {
+                  this.customerService.createCustomer(this.tmpUser.username, this.tmpUser.password1)
+                      .subscribe(data => {
+                            this.newCustomer = data;
+                            console.log(this.newCustomer)
+                          },
+                          error => console.log('Error :: ' + error.statusText))
+                }
+              },
+              error => console.log("Error :: " + error.statusText)
+          )
+
     }
+
   }
 
 }

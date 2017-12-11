@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 
 //Import the Http Module and Data Service
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'
+
 //Import credit card module
 // import { NgXCreditCardsModule } from 'ngx-credit-cards';
 // import { CreditCardDirectivesModule } from 'ng2-cc-library'
@@ -40,6 +42,8 @@ import { ProfileComponent } from './customer/profile/profile.component';
       HttpModule,
       FormsModule,
       AppRoutingModule,
+      HttpClientModule,
+
     // NgXCreditCardsModule,
     // CreditCardDirectivesModule,
 
