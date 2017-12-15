@@ -47,3 +47,7 @@ export const RESTAURANTS: Restaurant[] = [
         postal_code: "V6B 2K8"
     }
 ]
+
+
+
+//curl -H 'Content-Type:application/json' -X POST 'http://localhost:3000/api/restaurants' -d '{"rid":7, "name":"test1"}'

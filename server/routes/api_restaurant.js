@@ -22,7 +22,7 @@ const asyncMiddleware = fn =>
 
   //Get restaurants By Name
   router.get('/restaurants', asyncMiddleware(async(req, res, next)=>{
-    let restaurantName = req.body.name;
+    let restaurantName = req.query.name;
     connection(asyncMiddleware(async (db) => {
       var restaurant = await db.collection('restaurants')
                       .find({name:restaurantName})
